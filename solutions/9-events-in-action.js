@@ -1,32 +1,31 @@
 export default () => {
   // BEGIN
-  const tabs = Array.from(document.querySelectorAll('[data-bs-toggle="tab"]'));
-
-  tabs.forEach((tab) => {
-    const targetSelector = tab.dataset.bsTarget;
-
-    tab.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      const currentTab = event.target;
-      const activeTab = document.querySelector('[data-bs-toggle="tab"].active');
-      const activeContentTab = document.querySelector('.tab-pane.active');
-      const targetTab = document.querySelector(targetSelector);
-
-      if (currentTab === activeTab && targetTab === activeContentTab) {
-        return;
-      }
-
-      if (activeTab && activeContentTab) {
-        activeTab.classList.remove('active');
-        activeContentTab.classList.remove('active');
-      }
-
-      currentTab.classList.add('active');
-      targetTab.classList.add('active');
-    });
-  });
   
+  const tabContainers = document.querySelectorAll('.row');
+  tabContainers.forEach((tabList) => {
+
+    const tabs = tabList.querySelectorAll('[role="tab"]');
+    tabs.forEach((tab) => {
+
+      tab.addEventListener('click', (e) => {
+        
+        e.preventDefault();
+
+        const activeTab = tabList.querySelector('.nav-link.active');
+        const activeContent = tabList.querySelector('.tab-pane.active');
+        const targetTab = tabList.querySelector(tab.getAttribute('data-bs-target'));
+        
+        activeTab.classList.remove('active');
+        activeContent.classList.remove('active');
+
+        targetTab.classList.add('active');
+        tab.classList.add('active');
+        
+       
+        console.log(`Clicked tab "${tab.innerText}".`);
+      })
+    })
+  })
+
   // END
 };
-

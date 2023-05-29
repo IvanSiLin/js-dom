@@ -6,6 +6,7 @@ export default () => {
   let alertCounter = 1;
   
   alertGeneratorButton.addEventListener('click', () => {
+    
     const alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', 'alert-primary');
     alertDiv.textContent = `Alert ${alertCounter}`;
